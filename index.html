@@ -5,49 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Alexis ❤️</title>
     <style>
-        body {
-            margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; text-align: center;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.5); padding: 40px; border-radius: 25px;
-            backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            max-width: 80%; z-index: 2;
-        }
-        h1 { color: #d32f2f; font-size: 2.2rem; margin-bottom: 30px; }
-        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; height: 100px; }
-        button {
-            padding: 15px 35px; font-size: 1.2rem; font-weight: bold; cursor: pointer;
-            border: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
+        body { margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); font-family: 'Segoe UI', sans-serif; overflow: hidden; text-align: center; }
+        .container { background: rgba(255, 255, 255, 0.5); padding: 40px; border-radius: 25px; backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); max-width: 80%; z-index: 2; }
+        h1 { color: #d32f2f; font-size: 2rem; margin-bottom: 30px; }
+        .buttons { display: flex; gap: 20px; justify-content: center; align-items: center; height: 100px; position: relative; }
+        button { padding: 15px 35px; font-size: 1.2rem; font-weight: bold; cursor: pointer; border: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; }
         #yesBtn { background-color: #ff4757; color: white; }
-        #yesBtn:hover { transform: scale(1.1); background-color: #ff6b81; }
-        #noBtn { background-color: #747d8c; color: white; position: relative; }
+        #noBtn { background-color: #747d8c; color: white; position: absolute; }
         .heart { position: absolute; color: rgba(255, 71, 87, 0.6); animation: float 4s infinite linear; z-index: 1; }
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-        .final-msg { font-size: 1.8rem; color: #d32f2f; font-weight: bold; line-height: 1.4; }
-        #player { display: none; } /* Ocultamos el reproductor de video */
+        @keyframes float { 0% { transform: translateY(100vh); opacity: 1; } 100% { transform: translateY(-10vh); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <div id="player"></div>
+    <div id="player" style="display:none;"></div>
 
     <div class="container">
         <h1 id="question">¿Quieres ser mi San Valentín este año? ❤️</h1>
-        <div class="buttons" id="buttonArea">
+        <div class="buttons">
             <button id="yesBtn" onclick="celebrate()">¡SÍ!</button>
             <button id="noBtn" onmouseover="moveButton()">No</button>
         </div>
     </div>
 
     <script>
-        // Cargar la API de YouTube
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -58,11 +39,8 @@
             player = new YT.Player('player', {
                 height: '0',
                 width: '0',
-                videoId: '2Vv-BfVoq4g', // ID de la canción Perfect
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0
-                }
+                videoId: '2Vv-BfVoq4g',
+                playerVars: { 'autoplay': 0, 'controls': 0 }
             });
         }
 
@@ -75,31 +53,17 @@
             btn.style.top = y + 'px';
         }
 
-          function celebrate() {
+        function celebrate() {
             if (player) {
                 player.playVideo();
             }
-
             const container = document.querySelector('.container');
             container.innerHTML = `
-                <div class="final-msg">
+                <div style="font-size: 1.8rem; color: #d32f2f; font-weight: bold; margin-bottom: 20px;">
                     Alexis, eres y serás por siempre mi San Valentín ❤️
                 </div>
-                <br>
-                <img src="nuestrafoto.jpeg" alt="Alexis y yo" style="width:100%; max-width:300px; border-radius:15px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); margin-top:20px;">
+                <img src="nuestrafoto.jpeg" alt="Nosotros" style="width:100%; max-width:300px; border-radius:15px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
             `;
-            for(let i=0; i<30; i++) { setTimeout(createHeart, i * 100); }
-        }}
-
-            const container = document.querySelector('.container');
-            container.innerHTML = `
-                <div class="final-msg">
-                    Alexis, eres y serás por siempre mi San Valentín ❤️
-                </div>
-                <br>
-                <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYyYm90azRyam94eXp3eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNwSULPk30/giphy.gif" alt="Amor" style="width:100%; max-width:250px; border-radius:15px;">
-            `;
-            for(let i=0; i<30; i++) { setTimeout(createHeart, i * 100); }
         }
 
         function createHeart() {
@@ -107,7 +71,6 @@
             heart.className = 'heart';
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
             heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 4000);
