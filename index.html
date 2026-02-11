@@ -75,11 +75,21 @@
             btn.style.top = y + 'px';
         }
 
-        function celebrate() {
-            // Reproducir la canción al aceptar
+          function celebrate() {
             if (player) {
                 player.playVideo();
             }
+
+            const container = document.querySelector('.container');
+            container.innerHTML = `
+                <div class="final-msg">
+                    Alexis, eres y serás por siempre mi San Valentín ❤️
+                </div>
+                <br>
+                <img src="nuestrafoto.jpeg" alt="Alexis y yo" style="width:100%; max-width:300px; border-radius:15px; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); margin-top:20px;">
+            `;
+            for(let i=0; i<30; i++) { setTimeout(createHeart, i * 100); }
+        }}
 
             const container = document.querySelector('.container');
             container.innerHTML = `
